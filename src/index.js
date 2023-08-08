@@ -1,6 +1,6 @@
 import { access } from 'fs/promises';
 import jimp from 'jimp';
-import { PrinterIOLinuxKernel } from './io/PrinterIOLinuxKernel';
+import { PrinterIOLinuxKernel, PrinterConsoleDebug } from './io';
 import { Job } from './job.js';
 
 

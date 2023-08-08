@@ -1,17 +1,19 @@
 import { readdir } from 'fs/promises';
+import { Printer } from "./_printer";
 
 
-class PrinterIOLinuxKernel {
+class PrinterIOLinuxKernel extends Printer {
+
+    constructor(dev_path) {
+        super();
+        this.dev_path = dev_path;
+    }
 
     static async list() {
         let read = await readdir("/dev/usb/");
         
 
         return await globPromise("/dev/usb/lp*");
-    }
-
-    constructor(dev_path) {
-        this.dev_path = dev_path;
     }
 
     async open() {
