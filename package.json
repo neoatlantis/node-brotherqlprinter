@@ -1,0 +1,11 @@
+{
+  "name": "node-brotherqlprinter",
+  "version": "1.0.0",
+  "description": "A nodejs driver for brother QL printer.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "NeoAtlantis",
+  "license": "GPL-2.0"
+}
