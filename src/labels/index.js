@@ -53,7 +53,7 @@ function getLabel(name) {
     return matches.length > 0 ? matches[0] : null;
 }
 
-function findLabel(width = null, length = null, formFactor = null) {
+function findLabel({width = null, length = null, formFactor = null}){
     let found = ALL_LABELS;
     if (formFactor) {
         found = found.filter(e => e.formFactor === formFactor);
