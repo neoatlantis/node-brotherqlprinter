@@ -3,9 +3,13 @@ import jimp from 'jimp';
 import { PrinterIOLinuxKernel, PrinterConsoleDebug } from './io';
 import { Job } from './job.js';
 
+const debug = require("debug")(APPNAME+":index");
 
-async function printImage() {
-    let printerList = PrinterIOLinuxKernel.list();
+
+
+/*async function printImage() {
+    let printerList = await PrinterIOLinuxKernel.list();
+    debug("Listing all printers:", printerList);
 
     if (printerList.length < 1) {
         console.log("No printer found.");
@@ -35,3 +39,9 @@ async function printImage() {
 
 printImage();
 
+*/
+
+export {
+    PrinterIOLinuxKernel, PrinterConsoleDebug,
+    Job,
+}

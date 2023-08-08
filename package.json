@@ -9,6 +9,8 @@
   "author": "NeoAtlantis",
   "license": "GPL-2.0",
   "devDependencies": {
+    "argparse": "^2.0.1",
+    "debug": "^4.3.4",
     "ifdef-loader": "^2.3.2",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4"

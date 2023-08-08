@@ -1,19 +1,22 @@
+import fs from "fs";
+import { BrotherGenericCommand } from "app/escp_commands/_command";
 import { readdir } from 'fs/promises';
 import { Printer } from "./_printer";
 
+const debug = require("debug")(APPNAME+":PrinterIOLinuxKernel");
 
 class PrinterIOLinuxKernel extends Printer {
 
     constructor(dev_path) {
         super();
         this.dev_path = dev_path;
+        debug("Device path: ", this.dev_path);
     }
 
     static async list() {
-        let read = await readdir("/dev/usb/");
-        
-
-        return await globPromise("/dev/usb/lp*");
+        let found = await readdir("/dev/usb/");
+        found = found.filter(e=>e.slice(0,2)=='lp');
+        return found.map(e=>"/dev/usb/"+e);
     }
 
     async open() {
@@ -52,7 +55,7 @@ class PrinterIOLinuxKernel extends Printer {
 
     write(data) {
         if (data instanceof BrotherGenericCommand) {
-            data = Buffer.from(data.toString());
+            data = data.toBuffer();
         }
         fs.writeSync(this.dev, data);
     }

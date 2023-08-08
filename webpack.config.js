@@ -33,6 +33,7 @@ module.exports = (env)=>{
 
     const generic_plugins = [
         new DefinePlugin({
+            APPNAME: JSON.stringify(package_json.name),
             VERSION: JSON.stringify(VERSION),
             DEV: JSON.stringify(is_dev),
         })
