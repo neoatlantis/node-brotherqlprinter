@@ -1,10 +1,8 @@
-import fs from 'fs';
-import { promisify } from 'util';
+import { access } from 'fs/promises';
 import jimp from 'jimp';
-import { PrinterIOLinuxKernel } from './io.js';
+import { PrinterIOLinuxKernel } from './io/PrinterIOLinuxKernel';
 import { Job } from './job.js';
 
-const fileExists = promisify(fs.access);
 
 async function printImage() {
     let printerList = PrinterIOLinuxKernel.list();
@@ -22,7 +20,7 @@ async function printImage() {
     let imagePath = process.argv[2];
 
     try {
-        await fileExists(imagePath, fs.constants.F_OK);
+        await access(imagePath);
     } catch (error) {
         console.log("The provided image file does not exist.");
         process.exit();

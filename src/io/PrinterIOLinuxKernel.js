@@ -1,11 +1,12 @@
-import fs from 'fs';
-import glob from 'glob';
-import { promisify } from 'util';
+import { readdir } from 'fs/promises';
 
-const globPromise = promisify(glob);
 
 class PrinterIOLinuxKernel {
+
     static async list() {
+        let read = await readdir("/dev/usb/");
+        
+
         return await globPromise("/dev/usb/lp*");
     }
 

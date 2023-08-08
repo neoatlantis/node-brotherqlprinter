@@ -5,8 +5,8 @@ import { StatusInformationResponse } from './escp_commands/StatusInformationResp
 
 import { CmdCommandModeSwitch } from './escp_commands/CommandModeSwitch.js';
 import { CmdSetEachMode } from './escp_commands/SetEachMode.js';
-import { CmdSetExpandedMode } from './escp_commands/SetExpandedMode.js';
-import { CmdSetFeedAmount } from './escp_commands/SetFeedAmount.js';
+import { CmdSetExpandedMode } from './escp_commands/CmdSetExpandedMode.js';
+import { CmdSetFeedAmount } from './escp_commands/CmdSetFeedAmount.js';
 import { CmdPrintInformation } from './escp_commands/PrintInformation.js';
 import { CmdRasterImageTransfer } from './escp_commands/RasterImageTransfer.js';
 import { CmdPrint } from './escp_commands/Print.js';
