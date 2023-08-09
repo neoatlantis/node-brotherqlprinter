@@ -26,9 +26,11 @@ class Job {
 
         printer.write(new CmdClearJob());
         printer.write(new CmdInitialize());
-
         printer.write(new CmdStatusInformationRequest());
+
         let resp = printer.read({ timeout: 3 });
+        
+        this.printer.close();
 
         if (!resp) {
             throw new Error("No response from printer.");
@@ -54,6 +56,8 @@ class Job {
 
     async print(image) {
         let err = null;
+        this.printer.open();
+
         try{
             image = await adaptImage(image, this.printerModel, this.labelType);
 
