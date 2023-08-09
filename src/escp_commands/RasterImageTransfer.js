@@ -5,9 +5,9 @@ import { Label, FormFactor } from '../labels/index.js';
 class CmdRasterImageTransfer extends BrotherGenericCommand {
     constructor(image, labelType, printerModel) {
         super();
-        if (!(image instanceof Image)) {
+        /*if (!(image instanceof Image)) {
             throw new Error('Image must be an instance of Jimp Image.');
-        }
+        }*/
         if (!(labelType instanceof Label)) {
             throw new Error('labelType must be an instance of Label.');
         }

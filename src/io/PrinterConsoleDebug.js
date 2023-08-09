@@ -1,4 +1,5 @@
 import { Printer } from "./_printer";
+import { Buffer } from "buffer";
 
 class PrinterConsoleDebug extends Printer {
 
@@ -6,11 +7,22 @@ class PrinterConsoleDebug extends Printer {
         super();
     }
 
+    read(){
+        return Buffer.from([
+            0x80, 0x20, 0x00, 0x34,
+            0x43, 0x00, 0x00, 0x00,
+            0x00, 0x00, 104,  0x0A, // 8,9,10,11
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+        ])
+    }
+
     write(data){
         console.log(data);
     }
-
-    read(){ return null }
 
 }
 

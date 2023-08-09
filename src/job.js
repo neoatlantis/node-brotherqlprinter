@@ -33,11 +33,11 @@ class Job {
         console.log(resp.toString());
 
         let printerModel = findPrinter(resp.printerCode);
-        let label = findLabel(
-            resp.mediaWidth,
-            resp.isContinuousMedia ? FormFactor.ENDLESS : null,
-            resp.mediaLength
-        );
+        let label = findLabel({
+            width: resp.mediaWidth,
+            formFactor: resp.isContinuousMedia ? FormFactor.ENDLESS : null,
+            length: resp.mediaLength,
+        });
 
         if (label.length !== 1) {
             throw new Error("Cannot determine label type.");

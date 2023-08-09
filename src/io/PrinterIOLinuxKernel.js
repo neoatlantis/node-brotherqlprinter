@@ -28,7 +28,7 @@ class PrinterIOLinuxKernel extends Printer {
         fs.closeSync(this.dev);
     }
 
-    async read(timeout = 5, length = 1024) {
+    read({ timeout = 5, length = 1024}) {
         let data = Buffer.alloc(0);
         let start = Date.now();
 
@@ -39,7 +39,6 @@ class PrinterIOLinuxKernel extends Printer {
                 data = Buffer.concat([data, buf.slice(0, bytesRead)]);
             }
             if (data.length) break;
-            await new Promise(resolve => setTimeout(resolve, 1));
         }
         if (!data.length) {
             let buf = Buffer.alloc(length);
