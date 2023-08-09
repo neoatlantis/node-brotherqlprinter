@@ -1,10 +1,12 @@
-const jimp = require("jimp");
-const { PrinterConsoleDebug, PrinterIOLinuxKernel, Job } = 
+const { PrinterIOLinuxKernel, Job } = 
     require("../dist/node-brotherqlprinter.dev.js");
+const fs = require("fs");
 
 async function printImage() {
-    //let printer = new PrinterConsoleDebug();
-    let printer = new PrinterIOLinuxKernel("/dev/usb/lp0");
+    let printers = await PrinterIOLinuxKernel.list();
+    console.log("Found printers:\n" + printers.join("\n"));
+
+    let printer = new PrinterIOLinuxKernel(printers[0]);
 
     if (process.argv.length < 2) {
         console.log("Please provide an image path.");
@@ -14,10 +16,13 @@ async function printImage() {
     let imagePath = process.argv[2];
 
     console.log(imagePath);
-    let image = await jimp.read(imagePath);
 
     let job = new Job(printer);
-    job.print(image);
+
+    let imageBuffer = fs.readFileSync(imagePath);
+
+    job.readAndPrint(imageBuffer);
+    // or job.readAndPrint(imagePath);
 }
 
 printImage();

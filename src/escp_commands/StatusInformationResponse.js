@@ -2,8 +2,6 @@ import { Buffer } from "buffer";
 
 class StatusInformationResponse {
     constructor(raw) {
-        console.log(raw, Buffer.isBuffer(raw));
-
         if(!Buffer.isBuffer(raw) || raw.length !== 32 || raw[0] !== 0x80 || raw[1] !== 0x20) {
             throw new Error('Invalid raw input.');
         }

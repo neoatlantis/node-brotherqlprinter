@@ -8,13 +8,14 @@ import { CmdSetEachMode } from './escp_commands/SetEachMode.js';
 import { CmdSetExpandedMode } from './escp_commands/CmdSetExpandedMode.js';
 import { CmdSetFeedAmount } from './escp_commands/CmdSetFeedAmount.js';
 import { CmdPrintInformation } from './escp_commands/PrintInformation.js';
-import { CmdRasterImageTransfer, encodeImageAsBinary } from './escp_commands/CmdRasterImageTransfer.js';
+import { CmdRasterImageTransfer } from './escp_commands/CmdRasterImageTransfer.js';
 import { CmdPrint } from './escp_commands/Print.js';
 
 import { findLabel, FormFactor } from './labels/index.js';
 import { findPrinter } from './models/index.js';
 import { adaptImage } from './image_adapter.js';
 
+const jimp = require("jimp");
 const debug = require("debug")(APPNAME+":Job")
 
 
@@ -52,9 +53,6 @@ class Job {
     }
 
     async print(image) {
-        //console.log(encodeImageAsBinary(image).toString("hex"));
-        //process.exit();
-
         image = await adaptImage(image, this.printerModel, this.labelType);
 
         let cmdList = [
@@ -78,6 +76,11 @@ class Job {
             return resp;
         }
         return null;
+    }
+
+    async readAndPrint(){
+        let image = await jimp.read.apply(this, [...arguments]);
+        return await this.print(image);
     }
 }
 

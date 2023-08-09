@@ -72,4 +72,4 @@ class CmdRasterImageTransfer extends BrotherGenericCommand {
     }
 }
 
-export { CmdRasterImageTransfer, encodeImageAsBinary };
+export { CmdRasterImageTransfer};
