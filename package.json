@@ -4,8 +4,10 @@
   "description": "A nodejs driver for brother QL printer.",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack"
+    "dev": "webpack",
+    "dist": "webpack --env production=1"
   },
+  "exports": "./dist/node-brotherqlprinter.dist.js",
   "author": "NeoAtlantis",
   "license": "GPL-2.0",
   "devDependencies": {
