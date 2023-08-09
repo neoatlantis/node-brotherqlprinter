@@ -56,6 +56,7 @@ class PrinterIOLinuxKernel extends Printer {
         if (data instanceof BrotherGenericCommand) {
             data = data.toBuffer();
         }
+        debug("write to printer", data.length, "bytes");
         fs.writeSync(this.dev, data);
     }
 }

@@ -8,16 +8,20 @@ import { CmdSetEachMode } from './escp_commands/SetEachMode.js';
 import { CmdSetExpandedMode } from './escp_commands/CmdSetExpandedMode.js';
 import { CmdSetFeedAmount } from './escp_commands/CmdSetFeedAmount.js';
 import { CmdPrintInformation } from './escp_commands/PrintInformation.js';
-import { CmdRasterImageTransfer } from './escp_commands/RasterImageTransfer.js';
+import { CmdRasterImageTransfer, encodeImageAsBinary } from './escp_commands/CmdRasterImageTransfer.js';
 import { CmdPrint } from './escp_commands/Print.js';
 
 import { findLabel, FormFactor } from './labels/index.js';
 import { findPrinter } from './models/index.js';
 import { adaptImage } from './image_adapter.js';
 
+const debug = require("debug")(APPNAME+":Job")
+
+
 class Job {
     constructor(printer) {
         this.printer = printer;
+        this.printer.open();
 
         printer.write(new CmdClearJob());
         printer.write(new CmdInitialize());
@@ -30,7 +34,7 @@ class Job {
         }
 
         resp = new StatusInformationResponse(resp);
-        console.log(resp.toString());
+        debug("Printer status read:", resp.toString());
 
         let printerModel = findPrinter(resp.printerCode);
         let label = findLabel({
@@ -48,6 +52,9 @@ class Job {
     }
 
     async print(image) {
+        //console.log(encodeImageAsBinary(image).toString("hex"));
+        //process.exit();
+
         image = await adaptImage(image, this.printerModel, this.labelType);
 
         let cmdList = [
