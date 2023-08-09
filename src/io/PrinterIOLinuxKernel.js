@@ -25,7 +25,10 @@ class PrinterIOLinuxKernel extends Printer {
     }
 
     close() {
-        fs.closeSync(this.dev);
+        try{
+            fs.closeSync(this.dev);
+        } catch(e){
+        }
     }
 
     read({ timeout = 5, length = 1024}) {

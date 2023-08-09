@@ -53,29 +53,46 @@ class Job {
     }
 
     async print(image) {
-        image = await adaptImage(image, this.printerModel, this.labelType);
+        let err = null;
+        try{
+            image = await adaptImage(image, this.printerModel, this.labelType);
 
-        let cmdList = [
-            new CmdCommandModeSwitch(CmdCommandModeSwitch.MODE_RASTER),
-            new CmdPrintInformation(this.labelType, image, true),
-            new CmdSetEachMode(true),
-            new CmdSetExpandedMode(true, false),
-            new CmdSetFeedAmount(this.labelType.feedMargin),
-            new CmdRasterImageTransfer(image, this.labelType, this.printerModel),
-            new CmdPrint()
-        ];
+            let cmdList = [
+                new CmdCommandModeSwitch(CmdCommandModeSwitch.MODE_RASTER),
+                new CmdPrintInformation(this.labelType, image, true),
+                new CmdSetEachMode(true),
+                new CmdSetExpandedMode(true, false),
+                new CmdSetFeedAmount(this.labelType.feedMargin),
+                new CmdRasterImageTransfer(image, this.labelType, this.printerModel),
+                new CmdPrint()
+            ];
 
-        for (let cmd of cmdList) {
-            this.printer.write(cmd);
+            for (let cmd of cmdList) {
+                this.printer.write(cmd);
+            }
+        } catch(e) {
+            err = e;
         }
 
-        let resp = this.printer.read({ timeout: 3 });
-        if (resp) {
-            resp = new StatusInformationResponse(resp);
-            console.log(resp.toString());
-            return resp;
+        if(err){
+            this.printer.close();
+            throw err;
         }
-        return null;
+
+        try{
+            let resp = this.printer.read({ timeout: 3 });
+            if (resp) {
+                resp = new StatusInformationResponse(resp);
+                console.log(resp.toString());
+                this.printer.close();
+                return resp;
+            }
+            this.printer.close();
+            return null;
+        } finally {
+            this.printer.close();
+            return null;
+        }
     }
 
     async readAndPrint(){
