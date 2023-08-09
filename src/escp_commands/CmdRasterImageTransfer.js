@@ -20,15 +20,6 @@ function encodeImageAsBinary(image){
             (binarize(imageBytes[i*32+5*4]) & 0x04) |
             (binarize(imageBytes[i*32+6*4]) & 0x02) |
             (binarize(imageBytes[i*32+7*4]) & 0x01)
-
-            /*(binarize(imageBytes[i*32+0*4]) & 0x01) |
-            (binarize(imageBytes[i*32+1*4]) & 0x02) |
-            (binarize(imageBytes[i*32+2*4]) & 0x04) |
-            (binarize(imageBytes[i*32+3*4]) & 0x08) |
-            (binarize(imageBytes[i*32+4*4]) & 0x10) |
-            (binarize(imageBytes[i*32+5*4]) & 0x20) |
-            (binarize(imageBytes[i*32+6*4]) & 0x40) |
-            (binarize(imageBytes[i*32+7*4]) & 0x80)*/
         );
     }
     
