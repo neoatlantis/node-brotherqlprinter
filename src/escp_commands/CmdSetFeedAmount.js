@@ -1,8 +1,9 @@
 import { BrotherESCPCommand } from './_command.js';
 
 class CmdSetFeedAmount extends BrotherESCPCommand {
-    constructor(feed = 35) {
+    constructor(feed) {
         super(Buffer.from('id'));
+        if(!feed) feed = 35;
         this.feed = feed;
     }
 
