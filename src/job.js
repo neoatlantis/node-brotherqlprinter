@@ -65,7 +65,7 @@ class Job {
                 new CmdCommandModeSwitch(CmdCommandModeSwitch.MODE_RASTER),
                 new CmdPrintInformation(this.labelType, image, true),
                 new CmdSetEachMode(true),
-                new CmdSetExpandedMode(true, false),
+                new CmdSetExpandedMode({ cutAtEnd: true, hires: false}),
                 new CmdSetFeedAmount(this.labelType.feedMargin),
                 new CmdRasterImageTransfer(image, this.labelType, this.printerModel),
                 new CmdPrint()

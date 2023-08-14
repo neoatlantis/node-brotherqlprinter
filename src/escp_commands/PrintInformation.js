@@ -2,7 +2,7 @@ import { BrotherESCPCommand } from './_command.js';
 import { FormFactor } from '../labels/index.js';
 
 class CmdPrintInformation extends BrotherESCPCommand {
-    constructor(label, image, isStartingPage = true) {
+    constructor(label, image, isStartingPage) {
         super(Buffer.from('iz'));
 
         let n1 = 0x02 | 0x04 | 0x08;
