@@ -61,6 +61,8 @@ module.exports = (env)=>{
         },
         externals: {
             "jimp": "jimp",
+            "serialport": "serialport",
+            "usb": "usb",
         },
         module: {
             rules: generic_rules, 

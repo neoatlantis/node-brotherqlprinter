@@ -1,6 +1,10 @@
 import { access } from 'fs/promises';
 import jimp from 'jimp';
-import { PrinterIOLinuxKernel, PrinterConsoleDebug } from './io';
+import {
+    PrinterIOLinuxKernel,
+    PrinterIOWindowsSerial,
+    PrinterConsoleDebug
+} from './io';
 import { Job } from './job.js';
 
 const debug = require("debug")(APPNAME+":index");
@@ -42,6 +46,6 @@ printImage();
 */
 
 export {
-    PrinterIOLinuxKernel, PrinterConsoleDebug,
+    PrinterIOLinuxKernel, PrinterIOWindowsSerial, PrinterConsoleDebug,
     Job,
 }

@@ -7,7 +7,7 @@ class PrinterConsoleDebug extends Printer {
         super();
     }
 
-    read(){
+    async read(){
         return Buffer.from([
             0x80, 0x20, 0x00, 0x34,
             0x43, 0x00, 0x00, 0x00,
@@ -20,7 +20,7 @@ class PrinterConsoleDebug extends Printer {
         ])
     }
 
-    write(data){
+    async write(data){
         console.log(data);
     }
 

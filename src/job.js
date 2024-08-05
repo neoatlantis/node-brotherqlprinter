@@ -22,15 +22,19 @@ const debug = require("debug")(APPNAME+":Job")
 class Job {
     constructor(printer) {
         this.printer = printer;
+    }
+
+    async init(){
+        const printer = this.printer;
         this.printer.open();
 
-        printer.write(new CmdClearJob());
-        printer.write(new CmdInitialize());
-        printer.write(new CmdStatusInformationRequest());
+        await printer.write(new CmdClearJob());
+        await printer.write(new CmdInitialize());
+        await printer.write(new CmdStatusInformationRequest());
 
-        let resp = printer.read({ timeout: 3 });
+        let resp = await printer.read({ timeout: 3 });
         
-        this.printer.close();
+        await this.printer.close();
 
         if (!resp) {
             throw new Error("No response from printer.");
@@ -52,11 +56,12 @@ class Job {
 
         this.labelType = label[0];
         this.printerModel = printerModel;
+        return this;
     }
 
     async print(image) {
         let err = null;
-        this.printer.open();
+        await this.printer.open();
 
         try{
             image = await adaptImage(image, this.printerModel, this.labelType);
@@ -72,29 +77,29 @@ class Job {
             ];
 
             for (let cmd of cmdList) {
-                this.printer.write(cmd);
+                await this.printer.write(cmd);
             }
         } catch(e) {
             err = e;
         }
 
         if(err){
-            this.printer.close();
+            await this.printer.close();
             throw err;
         }
 
         try{
-            let resp = this.printer.read({ timeout: 3 });
+            let resp = await this.printer.read({ timeout: 3 });
             if (resp) {
                 resp = new StatusInformationResponse(resp);
                 console.log(resp.toString());
                 this.printer.close();
                 return resp;
             }
-            this.printer.close();
+            await this.printer.close();
             return null;
         } finally {
-            this.printer.close();
+            await this.printer.close();
             return null;
         }
     }

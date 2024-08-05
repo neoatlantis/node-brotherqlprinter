@@ -18,6 +18,8 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "jimp": "^0.22.10"
+    "jimp": "^0.22.10",
+    "serialport": "^12.0.0",
+    "usb": "^2.13.0"
   }
 }

@@ -24,14 +24,14 @@ class PrinterIOLinuxKernel extends Printer {
         return this;
     }
 
-    close() {
+    async close() {
         try{
             fs.closeSync(this.dev);
         } catch(e){
         }
     }
 
-    read({ timeout = 5, length = 1024}) {
+    async read({ timeout = 5, length = 1024}) {
         let data = Buffer.alloc(0);
         let start = Date.now();
 
@@ -55,7 +55,7 @@ class PrinterIOLinuxKernel extends Printer {
         }
     }
 
-    write(data) {
+    async write(data) {
         if (data instanceof BrotherGenericCommand) {
             data = data.toBuffer();
         }
