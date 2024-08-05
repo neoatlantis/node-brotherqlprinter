@@ -26,7 +26,7 @@ async function printImage() {
         let imageBuffer = fs.readFileSync(imagePath);
 
         await job.readAndPrint(imageBuffer);
-        await job.readAndPrint(imageBuffer);
+        //await job.readAndPrint(imageBuffer);
         // or job.readAndPrint(imagePath);
     } catch(e){
         console.error(e);

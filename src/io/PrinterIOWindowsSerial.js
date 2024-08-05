@@ -64,7 +64,7 @@ class PrinterIOWindowsSerial extends Printer {
         return this;
     }
 
-    close() {
+    async close() {
         if(this.#device && this.#device.close()){
             this.#device.close();
         }
