@@ -17,12 +17,12 @@ async function printImage() {
 
     console.log(imagePath);
 
-    let job = new Job(printer);
+    let job = await (new Job(printer)).init();
 
     let imageBuffer = fs.readFileSync(imagePath);
 
     await job.readAndPrint(imageBuffer);
-    await job.readAndPrint(imageBuffer);
+    //await job.readAndPrint(imageBuffer);
     // or job.readAndPrint(imagePath);
 }
 
