@@ -2,7 +2,7 @@ import { access } from 'fs/promises';
 import jimp from 'jimp';
 import {
     PrinterIOLinuxKernel,
-    PrinterIOWindowsSerial,
+    PrinterIOUSB,
     PrinterConsoleDebug
 } from './io';
 import { Job } from './job.js';
@@ -46,6 +46,6 @@ printImage();
 */
 
 export {
-    PrinterIOLinuxKernel, PrinterIOWindowsSerial, PrinterConsoleDebug,
+    PrinterIOLinuxKernel, PrinterIOUSB, PrinterConsoleDebug,
     Job,
 }

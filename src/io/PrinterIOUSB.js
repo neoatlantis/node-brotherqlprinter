@@ -1,12 +1,11 @@
 import fs from "fs";
 import { BrotherGenericCommand } from "app/escp_commands/_command";
 import { Printer } from "./_printer";
-import { SerialPort } from 'serialport';
 import { usb, getDeviceList, findByIds } from "usb";
 
-const debug = require("debug")(APPNAME+":PrinterIOWindowsSerial");
+const debug = require("debug")(APPNAME+":PrinterIOUSB");
 
-class PrinterIOWindowsSerial extends Printer {
+class PrinterIOUSB extends Printer {
 
     #device;
     #endpoint_out;
@@ -121,4 +120,4 @@ class PrinterIOWindowsSerial extends Printer {
     }
 }
 
-export { PrinterIOWindowsSerial };
+export { PrinterIOUSB };

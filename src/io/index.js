@@ -1,9 +1,9 @@
 import { PrinterIOLinuxKernel } from "./PrinterIOLinuxKernel";
-import { PrinterIOWindowsSerial } from "./PrinterIOWindowsSerial";
+import { PrinterIOUSB } from "./PrinterIOUSB";
 import { PrinterConsoleDebug } from "./PrinterConsoleDebug";
 
 export {
     PrinterIOLinuxKernel,
-    PrinterIOWindowsSerial,
+    PrinterIOUSB,
     PrinterConsoleDebug
 }

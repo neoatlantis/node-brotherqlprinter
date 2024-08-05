@@ -1,12 +1,12 @@
-const { PrinterIOWindowsSerial, Job } = 
+const { PrinterIOUSB, Job } = 
     require("../dist/node-brotherqlprinter.dev.js");
 const fs = require("fs");
 
 async function printImage() {
-    let printers = await PrinterIOWindowsSerial.list();
+    let printers = await PrinterIOUSB.list();
     console.log("Found printers:\n" + printers.join("\n"));
 
-    let printer = new PrinterIOWindowsSerial(printers[0]);
+    let printer = new PrinterIOUSB(printers[0]);
 
     try{
         if (process.argv.length < 2) {
